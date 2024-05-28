@@ -1,15 +1,20 @@
 {
-    "compilerOptions": {
-      "target": "ES2017",
-      "module": "commonjs",
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "strict": true,
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "strictPropertyInitialization": false
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules"]
-  }
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "typeRoots": [
+      "./src/express", // Inclui o diretório onde está o arquivo express.d.ts
+      "./node_modules/@types"
+    ]
+  },
+  
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
