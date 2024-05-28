@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ObjectIdColumn } from "typeorm"
+import { Entity, Column, ObjectIdColumn, ObjectId } from "typeorm"
 
 @Entity()
-export class Photo {
+export class User {
     @ObjectIdColumn()
-    id: number;
+    id: ObjectId;
 
     @Column()
     username: string;
