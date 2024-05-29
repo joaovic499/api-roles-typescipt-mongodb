@@ -17,6 +17,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^5.9.2",
+    "ngx-cookie-service": "^18.0.0",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.20"
   },
