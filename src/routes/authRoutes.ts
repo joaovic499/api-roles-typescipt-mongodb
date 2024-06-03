@@ -1,10 +1,12 @@
+import { totalFuncionarios, trocarSenha } from './../auth/authController';
 import express, { Router } from 'express';
-import { login, register, teste } from '../auth/authController';
+import { login, register } from '../auth/authController';
+import { count } from 'console';
 
 const router = Router();
 
-
-router.get('/', teste)
+router.put('/changePassword', trocarSenha )
+router.get('/count', totalFuncionarios)
 router.post('/login', login);
 router.post('/register', register);
 

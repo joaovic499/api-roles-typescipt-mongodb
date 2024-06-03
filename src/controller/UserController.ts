@@ -2,11 +2,18 @@ import { Request, Response } from "express";
 import { getMongoRepository } from "typeorm";
 import { User } from '../entity/User'
 import { MyDataSource } from "../data-source";
+import { count } from "console";
 
 const userRepository = MyDataSource.getMongoRepository(User)
 export class UserController {
 
-    async all(req: Request, res:Response) {;
+    async contar(req: Request, res:Response){
+        const contar = userRepository.countDocuments(User);
+        res.json({ count: contar})
+        
+    }
+
+    async all(req: Request, res:Response) {
         const users = userRepository.find();
         res.json(users);
     }
