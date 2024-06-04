@@ -6,6 +6,7 @@ const secretKey = 'apiidopçekmjncxvvnmljo1993-0303@@@30230030@@@3030030'
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
 
     const authHeader = req.headers.authorization;
+    console.log('Authorization Header:', authHeader);
     if(!authHeader) {
         return res.status(401).json({
             error: 'true',

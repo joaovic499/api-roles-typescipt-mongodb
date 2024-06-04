@@ -2,10 +2,10 @@ import { totalFuncionarios, trocarSenha } from './../auth/authController';
 import express, { Router } from 'express';
 import { login, register } from '../auth/authController';
 import { count } from 'console';
+import { authenticateJWT } from '../middleware/auth';
 
 const router = Router();
-
-router.put('/changePassword', trocarSenha )
+router.put('/changePassword', trocarSenha)
 router.get('/count', totalFuncionarios)
 router.post('/login', login);
 router.post('/register', register);
