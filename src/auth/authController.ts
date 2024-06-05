@@ -128,3 +128,23 @@ export const editarUsuario = async (req: Request, res: Response) => {
 
 
 }
+
+export const deleteUsuario = async(req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        console.log(id);
+        const user = await userRepository.delete(id);
+        console.log(user);
+        if(!user) {
+            return res.status(404).json({ error: "Funcionário não encontrado para deletar"});
+        }
+        return res.json({
+            message: "Funcionario deletado com sucesso"
+        });
+
+    } catch (error) {
+        console.log("Erro ao exclui um usuário!", error);
+        return res.status(500).json({error: "Erro ao excluir um usuário"});
+    }
+
+}
