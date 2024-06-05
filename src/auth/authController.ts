@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import { MyDataSource } from '../data-source';
 import { count } from 'console';
 import { ObjectId } from 'mongodb';
+import { UserController } from '../controller/UserController'
 
 const secretKey = 'apiidopçekmjncxvvnmljo1993-0303@@@30230030@@@3030030'
 const userRepository = MyDataSource.getMongoRepository(User)
@@ -20,9 +21,6 @@ export const login = async (req: Request, res: Response) => {
         res.status(401).json({ message: 'Credenciais invalida '});
     };
 }
-
-
-    //const useroid = await userRepository.findOne({where: { _id: new ObjectId("6657599ded17d34068dd9bd0") } })
 
 export const register = async (req: Request, res: Response) => {
     const { username, password, role } = req.body;
@@ -44,8 +42,8 @@ export const register = async (req: Request, res: Response) => {
 }
 
 export const totalFuncionarios = async (req: Request, res: Response) => {
-            const countFuncionario = await userRepository.countDocuments();
-            res.json({count: countFuncionario});
+        const countFuncionario = await userRepository.countDocuments();
+        res.json({count: countFuncionario});
     }
 
 export const trocarSenha = async (req: Request, res: Response) => {
@@ -91,4 +89,42 @@ export const trocarSenha = async (req: Request, res: Response) => {
     console.error(error);
     return res.status(500).json({ error: "Erro interno do servidor"});
     }
+}
+
+export const todosUsuarios = async (re: Request, res: Response) => {
+    try{
+        const users = await userRepository.find();
+        res.status(201).json(users);
+            } catch (error) {
+                console.log('Erro ao recuperar os usuários', error);
+                res.status(500).json({ error: 'Erro interno do servidor'});
+            }
+
+}
+
+export const editarUsuario = async (req: Request, res: Response) => {
+    try {
+        const {username, role} = req.body;
+        const id = req.params.id;
+        const user = await userRepository.findOne({where: { _id: new ObjectId(id)}})
+
+        if(!user){
+            return res.status(404).json({error: "Usuário não encontrado"});
+    }
+
+    user.username = username;
+    user.role = role;
+    await userRepository.save(user);
+
+    return res.json({
+        user,
+        message: "Usuario editado com sucesso"
+    });
+
+    } catch (error) {
+        console.log("Erro ao editar o usuario", error);
+        return res.status(500).json({error: "Erro ao editar um usuário"});
+    }
+
+
 }

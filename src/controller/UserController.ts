@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import { getMongoRepository } from "typeorm";
 import { User } from '../entity/User'
 import { MyDataSource } from "../data-source";
-import { count } from "console";
 
 const userRepository = MyDataSource.getMongoRepository(User)
 export class UserController {
