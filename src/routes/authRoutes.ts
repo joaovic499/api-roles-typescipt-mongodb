@@ -5,7 +5,7 @@ import { authenticateJWT } from '../middleware/auth';
 import { authorizeAdmin, authorizeUser } from '../middleware/authorize';
 
 const router = Router();
-router.get('/last/usuario', dadosUltimoUsuario)
+router.get('/last/usuario', authorizeAdmin, authenticateJWT, dadosUltimoUsuario)
 router.delete("/delete/usuario/:id", deleteUsuario)
 router.get('/all/usuarios', authenticateJWT, authorizeAdmin, todosUsuarios)
 router.put('/changePassword', authenticateJWT, trocarSenha)
