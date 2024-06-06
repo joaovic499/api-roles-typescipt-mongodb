@@ -148,3 +148,21 @@ export const deleteUsuario = async(req: Request, res: Response) => {
     }
 
 }
+
+export const dadosUltimoUsuario = async(req: Request, res: Response) =>{
+    try {
+        const usuario = await userRepository.find();
+        const ultimoUsuario = usuario.sort((a,b) => Number(b.id) - Number(a.id))[0];
+        if(ultimoUsuario){
+            const { id, username, role} = ultimoUsuario;
+            res.json({id, username, role})
+        } else {
+            return res.status(404).json({mensagem: 'Nenhum usuário encontrado'});
+        }
+        } catch (error){
+            console.log(error)
+            res.status(500).json({mensage: 'Erro ao recuperar o ultimo usuario encontrado'});
+        }
+   
+
+}

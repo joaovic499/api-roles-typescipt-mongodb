@@ -1,11 +1,11 @@
-import { deleteUsuario, editarUsuario, todosUsuarios, totalFuncionarios, trocarSenha } from './../auth/authController';
+import { dadosUltimoUsuario, deleteUsuario, editarUsuario, todosUsuarios, totalFuncionarios, trocarSenha } from './../auth/authController';
 import express, { Router } from 'express';
 import { login, register } from '../auth/authController';
-import { count } from 'console';
 import { authenticateJWT } from '../middleware/auth';
 import { authorizeAdmin, authorizeUser } from '../middleware/authorize';
 
 const router = Router();
+router.get('/last/usuario', dadosUltimoUsuario)
 router.delete("/delete/usuario/:id", deleteUsuario)
 router.get('/all/usuarios', authenticateJWT, authorizeAdmin, todosUsuarios)
 router.put('/changePassword', authenticateJWT, trocarSenha)
